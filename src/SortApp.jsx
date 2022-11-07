@@ -4,11 +4,16 @@ import { Bar } from './Bar';
 
 export const SortApp = () => {
     
-    let taco = [ 60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40, 5]
+    let taco = [ 60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40, 5, 
+        // 60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40,60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40,
+        // 60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40, 5, 60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40,60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40,
+        // 60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40, 5, 60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40,60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40,
+        // 60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40, 5, 60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40,60, 35 ,30, 25, 50, 15, 10, 20, 45, 55, 40,
+    ]
     const [arr, setArr] = useState(taco)
     const [disabled, setDisabled] = useState(false)
     let arrayLength = taco.length;
-    const speed = 50;
+    const speed = 5;
     let lap;
 
     useEffect(() => {
@@ -39,51 +44,40 @@ export const SortApp = () => {
                     setTimeout(() => {
 
                         if ( taco[ index ] > taco[ index + 1]){
-                            //container.childNodes.style.background = 'blue';
-                            //container.childNodes[index].style.background = 'green';
                             let temp = taco[ index ]
                             taco[ index ] = taco[ index + 1 ]
                             taco[ index + 1] = temp
-                            console.log('step:', speed * index, 'swap')
+                            //console.log('step:', speed * index, 'swap')
                         } else {
-                            console.log('step:', speed * index)
+                            //console.log('step:', speed * index)
                         }
                         
                         setArr([...arr])
-                        console.log(speed * index, 'length:',arrayLength - i -1)
+                        //console.log(speed * index, 'length:',arrayLength - i -1)
                     }, speed * index);
                     
                 }
                 
                 container.childNodes[arrayLength - i].style.background = 'green';
                 
-                    console.log(speed)
-                }, 550 * i)
+                    //console.log(speed)
+                }, ((speed * arrayLength ) / 95 * 100) * i )
                 //console.log(((speed * arrayLength) * i ) - (speed * i)*(2))
         }
         setTimeout(() => {
             container.childNodes.forEach((element, index) => {
                 setTimeout(() => {
                     container.childNodes[ index ].style.background = 'red';
-                }, 50 * index);
+                }, 10 * index);
             });
             
-        }, 6500);
+        }, arrayLength * 145  );
     
         setDisabled(false)
     }
 
     
-    
-    // useEffect(() => {
-    //     setArr([...taco])
-        
-    
-      
-    // }, [arr])
-    
 
-    //console.log('fadfa', taco, arr)
     
     
     
@@ -103,7 +97,7 @@ export const SortApp = () => {
                         ))
                     }
             </div>
-            <button onClick={ swap } disabled={ disabled }>sort</button> 
+            <button onClick={ swap } disabled={ disabled }>Sort</button> 
             {/* <button onClick={ random }>random</button> */}
         </>
     )
