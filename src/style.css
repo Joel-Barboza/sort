@@ -15,7 +15,7 @@ body {
     background: rgb(33, 51, 88);
     color: white;
     margin: 1px;
-    width: 1.5rem;
+    width: 1.3rem;
     /* transition: height 1s ease; */
     
 }
@@ -28,6 +28,7 @@ body {
     display: flex;
     align-items: flex-end;
     height: 330px;
+    justify-content: center;
 }
 
 button {
