@@ -6,17 +6,20 @@
 
 body {
     padding: 0 3rem;
+    background: #2c2c2c;
+    display: flex;
+    justify-content: center;
 }
 
 .bar {
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    background: rgb(33, 51, 88);
+    background: rgb(112, 146, 214);
     color: white;
     margin: 1px;
     /* width: 1px; */
-    width: 1.3rem;
+    width: 1rem;
     /* transition: background 50ms ease; */
     
 }

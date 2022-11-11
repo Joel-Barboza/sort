@@ -6,7 +6,7 @@ export const Bar = ({ value }) => {
             className="bar"
             style={{height: `${ value * 5 + 3 }px`}}
         >
-            {/* <p>{ value }</p> */}
+            <p>{  }</p>
         </div>
     )
 }
