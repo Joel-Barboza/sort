@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 export const getArray = () => {
     
     const [disableBtn, setDisableBtn] = useState(false);
+    const [isSorted, setIsSorted] = useState(false)
     const [arr, setArr] = useState({array: []});
 
     const { array } = arr;
     const arrayLength = array.length;
     const speed = 0;
-    const numberOfBars = 50 ;
+    const numberOfBars = 20 ;
     const colors = {
         purple: 'rgb(233, 96, 233)',
         green: 'rgb(94, 219, 121)',
@@ -27,6 +28,7 @@ export const getArray = () => {
         }
     
         setArr({array});
+        setIsSorted(false);
         console.log(array)
 
     }
@@ -70,15 +72,15 @@ export const getArray = () => {
            
             for ( let i = start; i + gap <= end; i++ ) {
                 let j = i + gap;
-                barsContainer.children[ j ].style.background = colors.blue;
-                barsContainer.children[ i ].style.background = colors.blue;
+                //barsContainer.children[ j ].style.background = colors.blue;
+                //barsContainer.children[ i ].style.background = colors.blue;
                 await wait(speed * gap)
                 
 
                 if ( array[i] > array[j] ) {
                     
-                    barsContainer.children[ i ].style.background = colors.purple;
-                    barsContainer.children[ j ].style.background = colors.purple;
+                    //barsContainer.children[ i ].style.background = colors.purple;
+                    //barsContainer.children[ j ].style.background = colors.purple;
                     swap(array, i, j);
                     setArr({array});
 
@@ -120,7 +122,12 @@ export const getArray = () => {
 
 
     const bubbleSort = async() => {
-    
+
+        if ( isSorted === true ) {
+            const generateNewArray = confirm('Array is already sorted \nDo you want to generate a new array?')
+            generateNewArray && newArray()
+            return;
+        }
         // array.sort( ( a, b ) => parseInt(a) - parseInt(b) )
         // setArr( [...array] )
     
@@ -158,6 +165,7 @@ export const getArray = () => {
             }
             
             setDisableBtn( false );
+            setIsSorted(true)
 
         }
     
