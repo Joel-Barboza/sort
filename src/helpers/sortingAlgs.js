@@ -1,35 +1,31 @@
 import { useState, useEffect } from 'react';
+import { helperFunctions } from './helperFunctions';
 
 
-export const getArray = () => {
+export const sortingAlgs = () => {
     
     const [disableBtn, setDisableBtn] = useState(false);
     const [isSorted, setIsSorted] = useState(false)
     const [arr, setArr] = useState({array: []});
+    const { barsContainer, colors, numberOfBars, resetColor, speed, swap, wait } = helperFunctions();
 
     const { array } = arr;
     const arrayLength = array.length;
-    const speed = 0;
-    const numberOfBars = 20 ;
-    const colors = {
-        purple: 'rgb(233, 96, 233)',
-        green: 'rgb(94, 219, 121)',
-        blue: 'rgb(112, 146, 214)',
-    }
-    
+
+
+
     const newArray = () => {
-
-        const array = [];
-        let max = 110;
+        resetColor(array, colors)
+        const tempArray = [];
+        let max = 300;
         let min = 4;
-
+        
         for (let i = 0; i < numberOfBars; i++) {
-            array.push(Math.floor(Math.random() * ( max - min ) + min ));
+            tempArray.push(Math.floor(Math.random() * ( max - min ) + min ));
         }
-    
-        setArr({array});
+        
+        setArr({ array: tempArray });
         setIsSorted(false);
-        console.log(array)
 
     }
 
@@ -37,19 +33,9 @@ export const getArray = () => {
         newArray();
         
     }, []);
-    
-    function wait(milisec) {
-        return new Promise(resolve => {
-            setTimeout(() => { resolve('') }, milisec);
-        })
-    }
 
-
-    
-    const swap = (array,i,j) => {
-        let temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
+    const isAlreadySorted = () => {
+        
     }
 
     const nextGap = (gap) => {
@@ -60,27 +46,26 @@ export const getArray = () => {
     }
     
     
-    
-
 
     const merge = async(array, start, end) => {
 
         let gap = end - start + 1;
 
-        //console.log('gap', gap)
+        console.log('gap', gap )
         for ( gap = nextGap(gap); gap > 0; gap = nextGap(gap)) {
-           
+            //await wait(2**speed+speed)
+           //await wait(5000)
             for ( let i = start; i + gap <= end; i++ ) {
                 let j = i + gap;
-                //barsContainer.children[ j ].style.background = colors.blue;
-                //barsContainer.children[ i ].style.background = colors.blue;
-                await wait(speed * gap)
-                
+                // barsContainer.children[ j ].style.background = colors.blue;
+                // barsContainer.children[ i ].style.background = colors.blue;
+                //await wait(speed)
+                //console.log(`comparing ${i} ${j}`)
 
                 if ( array[i] > array[j] ) {
                     
                     //barsContainer.children[ i ].style.background = colors.purple;
-                    //barsContainer.children[ j ].style.background = colors.purple;
+                    // barsContainer.children[ j ].style.background = colors.purple;
                     swap(array, i, j);
                     setArr({array});
 
@@ -95,21 +80,30 @@ export const getArray = () => {
 
     const mergeSort = async(ar, s, e) => {
 
+        if ( isSorted === true ) {
+            const generateNewArray = confirm('Array is already sorted \nDo you want to generate a new array?')
+            generateNewArray && newArray()
+            return;
+        }
+
         if ( s === e ) return;
         
+        console.log('1-ss', ar, ar[s], ar[e])
 
         let mid = Math.floor((s + e) / 2);
-        console.log('1-start', array)
         //await wait(speed)
         mergeSort(ar, s, mid);
-        //await wait(speed * 3)
-        console.log('2-first', array)
+        //console.log('2-ss', ar, ar[s], ar[mid])
+        //await wait(speed)
+        //console.log('1-tt', ar, ar[mid + 1], ar[e])
         mergeSort(ar, mid + 1, e);
+        //console.log('2-tt', ar, ar[mid + 1], ar[e])
         
-        //await wait(speed * 3)
-        console.log('3-second', array)
+        //await wait(speed)
         merge(ar, s, e)
+        //console.log('3-second', ar, s, e)
         
+        setIsSorted(true);
         
     }
 
@@ -118,25 +112,29 @@ export const getArray = () => {
 
 
 
-
-
+    // ----------- Javascript function to sort -----------------
+    // array.sort( ( a, b ) => parseInt(a) - parseInt(b) )
+    // setArr( [...array] )
 
     const bubbleSort = async() => {
+        // let maxLength = array.length
+        // if ( array.length > 70 ) {
+        //     array.length = 70
+        //     maxLength = 70
+        // }
+
 
         if ( isSorted === true ) {
             const generateNewArray = confirm('Array is already sorted \nDo you want to generate a new array?')
             generateNewArray && newArray()
             return;
         }
-        // array.sort( ( a, b ) => parseInt(a) - parseInt(b) )
-        // setArr( [...array] )
     
-        // iterates when all the elements of the array have been checked
-        // each lap should be a new fully sorted element
+        // ---- iterates when all the elements of the array have been checked
+        // each lap should be a new fully sorted element ----
         for (let i = 0; i < arrayLength; i++) {
             
             setDisableBtn( true );
-            const barsContainer = document.getElementById('barsContainer');
             const iteration = arrayLength - i - 1;
 
             if (!!barsContainer.children[ iteration + 1] === !undefined ) {
@@ -145,7 +143,7 @@ export const getArray = () => {
             }
             await wait(( -speed * i + arrayLength ) );
             
-            // iterates for every array item 
+            // ---- iterates for every array item ----
             for (let j = 0; j < iteration; j++) {
                 await wait(speed);
                 if (!!barsContainer.children[ iteration ] === !undefined ) {
@@ -165,14 +163,25 @@ export const getArray = () => {
             }
             
             setDisableBtn( false );
-            setIsSorted(true)
+            setIsSorted(true);
 
         }
     
         array.map( ( v, index ) => {
 
             setTimeout(() => {
-                barsContainer.childNodes[ index ].style.background = colors.blue;
+                if ( index === 0 ) {
+                    barsContainer.childNodes[ index ].style.background = colors.red;
+
+                } else {
+                    
+                    barsContainer.childNodes[ index - 1].style.background = colors.pink;
+                    barsContainer.childNodes[ index ].style.background = colors.red;
+                }
+                if ( index === array.length - 1) {
+
+                    barsContainer.childNodes[ index ].style.background = colors.pink;
+                }
             }, 15 * (index + 5));
 
         });
@@ -188,6 +197,7 @@ export const getArray = () => {
         disableBtn,
         bubbleSort,
         mergeSort,
-        merge
+        merge,
+        resetColor
     }
 }

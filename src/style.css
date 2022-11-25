@@ -27,7 +27,7 @@ body {
     color: #000000;
     margin: 1px;
     /* width: 1px; */
-    width: 1.3rem;
+    width: 1px;
     /* transition: background 50ms ease; */
     
 }
@@ -40,7 +40,7 @@ body {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    /* height: 330px; */
+    height: 310px;
 }
 
 .btn-container {

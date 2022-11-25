@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
 import { Bar } from './Bar';
-import { getArray } from './helpers/getArray';
+import { sortingAlgs } from './helpers/sortingAlgs';
 //import { random } from './random';
 
 
 export const SortApp = () => {
 
-    const { array, newArray, disableBtn, bubbleSort, mergeSort, merge, test} = getArray();
+    const { array, newArray, disableBtn, bubbleSort, mergeSort, test} = sortingAlgs();
 
     return (
         <div className="container">
@@ -17,8 +16,8 @@ export const SortApp = () => {
                             key={ index }
                             value={ value }
                         />
-                        ))
-                    }
+                    ))
+                }
             </div>
             <div className="btn-container">
                 <button onClick={ newArray } disabled={ disableBtn }>New Array</button>
