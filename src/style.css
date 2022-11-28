@@ -12,6 +12,9 @@ body {
     align-items: center;
     min-height: 100vh;
 }
+h2 {
+    color: #c2c2c2;
+}
 
 .container {
     display: flex;
@@ -27,7 +30,7 @@ body {
     color: #000000;
     margin: 1px;
     /* width: 1px; */
-    width: 1px;
+    width: 8px;
     /* transition: background 50ms ease; */
     
 }
@@ -40,7 +43,7 @@ body {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    height: 310px;
+    /* height: 310px; */
 }
 
 .btn-container {

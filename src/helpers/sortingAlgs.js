@@ -7,17 +7,17 @@ export const sortingAlgs = () => {
     const [disableBtn, setDisableBtn] = useState(false);
     const [isSorted, setIsSorted] = useState(false)
     const [arr, setArr] = useState({array: []});
-    const { barsContainer, colors, numberOfBars, resetColor, speed, swap, wait } = helperFunctions();
+    const { barsContainer, colors, numberOfBars, resetColor, speed, swap, numSwaps, resetSwapsNum, wait } = helperFunctions();
 
     const { array } = arr;
     const arrayLength = array.length;
 
 
-
     const newArray = () => {
-        resetColor(array, colors)
+        resetColor(array, colors);
+        resetSwapsNum();
         const tempArray = [];
-        let max = 300;
+        let max = 500;
         let min = 4;
         
         for (let i = 0; i < numberOfBars; i++) {
@@ -34,8 +34,25 @@ export const sortingAlgs = () => {
         
     }, []);
 
-    const isAlreadySorted = () => {
-        
+    const checkSorted = () => {
+        array.map( ( v, index ) => {
+
+            setTimeout(() => {
+                if ( index === 0 ) {
+                    barsContainer.childNodes[ index ].style.background = colors.red;
+
+                } else {
+                    
+                    barsContainer.childNodes[ index - 1].style.background = colors.pink;
+                    barsContainer.childNodes[ index ].style.background = colors.red;
+                }
+                if ( index === array.length - 1) {
+
+                    barsContainer.childNodes[ index ].style.background = colors.pink;
+                }
+            }, 15 * (index + 5));
+
+        });
     }
 
     const nextGap = (gap) => {
@@ -51,24 +68,25 @@ export const sortingAlgs = () => {
 
         let gap = end - start + 1;
 
-        console.log('gap', gap )
+        // console.log('gap', gap )
         for ( gap = nextGap(gap); gap > 0; gap = nextGap(gap)) {
-            //await wait(2**speed+speed)
-           //await wait(5000)
+            //await wait((speed*2)**2)
+            await wait( speed * 50 / gap)
+            //console.log(gap)
             for ( let i = start; i + gap <= end; i++ ) {
                 let j = i + gap;
-                // barsContainer.children[ j ].style.background = colors.blue;
-                // barsContainer.children[ i ].style.background = colors.blue;
-                //await wait(speed)
-                //console.log(`comparing ${i} ${j}`)
-
+                barsContainer.children[ 1 ].style.background = colors.blue;
+                // barsContainer.children[ j].style.background = colors.blue;
+                await wait(speed)
+                //console.log(true)
+                
+                barsContainer.children[ 1 ].style.background = colors.purple;
                 if ( array[i] > array[j] ) {
                     
-                    //barsContainer.children[ i ].style.background = colors.purple;
                     // barsContainer.children[ j ].style.background = colors.purple;
                     swap(array, i, j);
                     setArr({array});
-
+                    
                 }
                 
                 
@@ -88,7 +106,7 @@ export const sortingAlgs = () => {
 
         if ( s === e ) return;
         
-        console.log('1-ss', ar, ar[s], ar[e])
+        //console.log('1-ss', ar, ar[s], ar[e])
 
         let mid = Math.floor((s + e) / 2);
         //await wait(speed)
@@ -167,24 +185,7 @@ export const sortingAlgs = () => {
 
         }
     
-        array.map( ( v, index ) => {
-
-            setTimeout(() => {
-                if ( index === 0 ) {
-                    barsContainer.childNodes[ index ].style.background = colors.red;
-
-                } else {
-                    
-                    barsContainer.childNodes[ index - 1].style.background = colors.pink;
-                    barsContainer.childNodes[ index ].style.background = colors.red;
-                }
-                if ( index === array.length - 1) {
-
-                    barsContainer.childNodes[ index ].style.background = colors.pink;
-                }
-            }, 15 * (index + 5));
-
-        });
+        checkSorted();
         
     
     }
@@ -198,6 +199,7 @@ export const sortingAlgs = () => {
         bubbleSort,
         mergeSort,
         merge,
-        resetColor
+        resetColor,
+        numSwaps
     }
 }

@@ -5,10 +5,13 @@ import { sortingAlgs } from './helpers/sortingAlgs';
 
 export const SortApp = () => {
 
-    const { array, newArray, disableBtn, bubbleSort, mergeSort, test} = sortingAlgs();
+    const { array, newArray, disableBtn, bubbleSort, mergeSort, test, numSwaps} = sortingAlgs();
+
+    
 
     return (
         <div className="container">
+            <h2>Swaps: { numSwaps }</h2>
             <div id="barsContainer" className="bar-container">
                 {
                     array.map( (value, index) => (
@@ -23,7 +26,7 @@ export const SortApp = () => {
                 <button onClick={ newArray } disabled={ disableBtn }>New Array</button>
                 <button onClick={ bubbleSort } disabled={ disableBtn }>Bubble Sort</button> 
                 <button onClick={ () => mergeSort(array, 0, array.length - 1) } disabled={ disableBtn }>Merge Sort</button>
-                <button onClick={ test } disabled={ disableBtn }>test</button>
+                {/* <button onClick={ test } disabled={ disableBtn }>test</button> */}
             </div>
         </div>
     )

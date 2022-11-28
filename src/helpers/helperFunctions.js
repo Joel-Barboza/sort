@@ -1,10 +1,12 @@
+import { useState } from "react";
 
 
 export const helperFunctions = () => {
 
     const barsContainer = document.getElementById('barsContainer');
-    const speed = 3;
-    const numberOfBars = 300 ;
+    const [numSwaps, setNumSwaps] = useState(0)
+    const speed = 1;
+    const numberOfBars = 30 ;
     const colors = {
         purple: 'rgb(233, 96, 233)',
         green: 'rgb(94, 219, 121)',
@@ -19,10 +21,19 @@ export const helperFunctions = () => {
         });
     }
 
+    const resetSwapsNum = () => {
+        setNumSwaps(0)
+    }
+
     const swap = (array,i,j) => {
         let temp = array[i];
         array[i] = array[j];
         array[j] = temp;
+        setNumSwaps((previousNum) => {
+                return previousNum + 1;
+            }
+        )
+        
     }
 
     const wait = (milisec) => {
@@ -37,7 +48,9 @@ export const helperFunctions = () => {
         colors, 
         resetColor,
         swap,
+        numSwaps,
         wait,
         barsContainer,
+        resetSwapsNum,
     }
 }
