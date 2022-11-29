@@ -7,8 +7,10 @@ export const sortingAlgs = () => {
     const [disableBtn, setDisableBtn] = useState(false);
     const [isSorted, setIsSorted] = useState(false)
     const [arr, setArr] = useState({array: []});
-    const { barsContainer, colors, numberOfBars, resetColor, speed, swap, numSwaps, resetSwapsNum, wait, sortedAnimation } = helperFunctions();
+    const { barsContainer, colors, numberOfBars, resetColor, swap, numSwaps, resetSwapsNum, wait, sortedAnimation } = helperFunctions();
 
+    
+    const speed = 1;
     const { array } = arr;
     const arrayLength = array.length;
 
@@ -46,19 +48,18 @@ export const sortingAlgs = () => {
     const merge = async(array, start, end) => {
 
         let gap = end - start + 1;
-        const gg = gap;
         
-        setTimeout(async() => {
+        //setTimeout(async() => {
         for ( gap = nextGap(gap); gap > 0; gap = nextGap(gap)) {
 
-            //await wait(speed * 55 * gg);
+            await wait(speed * (arrayLength / 2) * gap);
                 for ( let i = start; i + gap <= end; i++ ) {
                     
-                    barsContainer.children[ 1 ].style.background = colors.purple;
+                    //barsContainer.children[ 1 ].style.background = colors.purple;
                     await wait(speed);
                     let j = i + gap;
                     // barsContainer.children[ j].style.background = colors.blue;
-                    barsContainer.children[ 1 ].style.background = colors.blue;
+                    //barsContainer.children[ 1 ].style.background = colors.blue;
                     //console.log(true)
                     
                     if ( array[i] > array[j] ) {
@@ -74,7 +75,7 @@ export const sortingAlgs = () => {
                 
                 
             }
-        }, speed * (arrayLength / 5) * gap);
+        //}, speed * (arrayLength / 2) * gap);
         
     }
 

@@ -7,7 +7,6 @@ export const helperFunctions = () => {
 
     const barsContainer = document.getElementById('barsContainer');
     const [numSwaps, setNumSwaps] = useState(0)
-    const speed = 1;
     const numberOfBars = width / 14 ;
     const colors = {
         purple: 'rgb(233, 96, 233)',
@@ -66,7 +65,6 @@ export const helperFunctions = () => {
     }
 
     return {
-        speed,
         numberOfBars,
         colors, 
         resetColor,
