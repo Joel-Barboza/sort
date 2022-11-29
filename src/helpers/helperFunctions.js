@@ -3,10 +3,12 @@ import { useState } from "react";
 
 export const helperFunctions = () => {
 
+    const width = innerWidth;
+
     const barsContainer = document.getElementById('barsContainer');
     const [numSwaps, setNumSwaps] = useState(0)
     const speed = 1;
-    const numberOfBars = 70 ;
+    const numberOfBars = width / 14 ;
     const colors = {
         purple: 'rgb(233, 96, 233)',
         green: 'rgb(94, 219, 121)',

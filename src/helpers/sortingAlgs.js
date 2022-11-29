@@ -46,32 +46,35 @@ export const sortingAlgs = () => {
     const merge = async(array, start, end) => {
 
         let gap = end - start + 1;
+        const gg = gap;
         
+        setTimeout(async() => {
         for ( gap = nextGap(gap); gap > 0; gap = nextGap(gap)) {
 
-            await wait(speed*(start + 1));
-
-            for ( let i = start; i + gap <= end; i++ ) {
-
-                await wait(speed);
-                let j = i + gap;
-                // barsContainer.children[ 1 ].style.background = colors.blue;
-                // barsContainer.children[ j].style.background = colors.blue;
-                //console.log(true)
-                
-                // barsContainer.children[ 1 ].style.background = colors.purple;
-                if ( array[i] > array[j] ) {
+            //await wait(speed * 55 * gg);
+                for ( let i = start; i + gap <= end; i++ ) {
                     
-                    // barsContainer.children[ j ].style.background = colors.purple;
-                    swap(array, i, j);
-                    setArr({array});
+                    barsContainer.children[ 1 ].style.background = colors.purple;
+                    await wait(speed);
+                    let j = i + gap;
+                    // barsContainer.children[ j].style.background = colors.blue;
+                    barsContainer.children[ 1 ].style.background = colors.blue;
+                    //console.log(true)
+                    
+                    if ( array[i] > array[j] ) {
+                        
+                        // barsContainer.children[ j ].style.background = colors.purple;
+                        swap(array, i, j);
+                        setArr({array});
+                        
+                    }
+                    
                     
                 }
                 
                 
             }
-            
-        }
+        }, speed * (arrayLength / 5) * gap);
         
     }
 
