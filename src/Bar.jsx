@@ -8,7 +8,7 @@ export const Bar = ({ value }) => {
     return (
         <div 
             className="bar"
-            style={{height: `${ Math.ceil(value / 7)}vh`}}
+            style={{height: `${ Math.ceil(value / 9)}vh`}}
         >
             <p>{  }</p>
         </div>

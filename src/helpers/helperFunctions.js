@@ -6,7 +6,7 @@ export const helperFunctions = () => {
     const barsContainer = document.getElementById('barsContainer');
     const [numSwaps, setNumSwaps] = useState(0)
     const speed = 1;
-    const numberOfBars = 100 ;
+    const numberOfBars = 70 ;
     const colors = {
         purple: 'rgb(233, 96, 233)',
         green: 'rgb(94, 219, 121)',
