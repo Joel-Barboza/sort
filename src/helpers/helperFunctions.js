@@ -6,7 +6,7 @@ export const helperFunctions = () => {
     const barsContainer = document.getElementById('barsContainer');
     const [numSwaps, setNumSwaps] = useState(0)
     const speed = 1;
-    const numberOfBars = 30 ;
+    const numberOfBars = 100 ;
     const colors = {
         purple: 'rgb(233, 96, 233)',
         green: 'rgb(94, 219, 121)',
@@ -42,6 +42,27 @@ export const helperFunctions = () => {
         })
     }
 
+    const sortedAnimation = (array) => {
+        array.map( ( v, index ) => {
+
+            setTimeout(() => {
+                if ( index === 0 ) {
+                    barsContainer.childNodes[ index ].style.background = colors.red;
+
+                } else {
+                    
+                    barsContainer.childNodes[ index - 1].style.background = colors.pink;
+                    barsContainer.childNodes[ index ].style.background = colors.red;
+                }
+                if ( index === array.length - 1) {
+
+                    barsContainer.childNodes[ index ].style.background = colors.pink;
+                }
+            }, 15 * (index + 5));
+
+        });
+    }
+
     return {
         speed,
         numberOfBars,
@@ -52,5 +73,6 @@ export const helperFunctions = () => {
         wait,
         barsContainer,
         resetSwapsNum,
+        sortedAnimation,
     }
 }

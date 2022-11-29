@@ -7,7 +7,7 @@ export const sortingAlgs = () => {
     const [disableBtn, setDisableBtn] = useState(false);
     const [isSorted, setIsSorted] = useState(false)
     const [arr, setArr] = useState({array: []});
-    const { barsContainer, colors, numberOfBars, resetColor, speed, swap, numSwaps, resetSwapsNum, wait } = helperFunctions();
+    const { barsContainer, colors, numberOfBars, resetColor, speed, swap, numSwaps, resetSwapsNum, wait, sortedAnimation } = helperFunctions();
 
     const { array } = arr;
     const arrayLength = array.length;
@@ -34,27 +34,6 @@ export const sortingAlgs = () => {
         
     }, []);
 
-    const checkSorted = () => {
-        array.map( ( v, index ) => {
-
-            setTimeout(() => {
-                if ( index === 0 ) {
-                    barsContainer.childNodes[ index ].style.background = colors.red;
-
-                } else {
-                    
-                    barsContainer.childNodes[ index - 1].style.background = colors.pink;
-                    barsContainer.childNodes[ index ].style.background = colors.red;
-                }
-                if ( index === array.length - 1) {
-
-                    barsContainer.childNodes[ index ].style.background = colors.pink;
-                }
-            }, 15 * (index + 5));
-
-        });
-    }
-
     const nextGap = (gap) => {
 
         if ( gap <= 1 ) return 0;
@@ -67,20 +46,20 @@ export const sortingAlgs = () => {
     const merge = async(array, start, end) => {
 
         let gap = end - start + 1;
-
-        // console.log('gap', gap )
+        
         for ( gap = nextGap(gap); gap > 0; gap = nextGap(gap)) {
-            //await wait((speed*2)**2)
-            await wait( speed * 50 / gap)
-            //console.log(gap)
+
+            await wait(speed*(start + 1));
+
             for ( let i = start; i + gap <= end; i++ ) {
+
+                await wait(speed);
                 let j = i + gap;
-                barsContainer.children[ 1 ].style.background = colors.blue;
+                // barsContainer.children[ 1 ].style.background = colors.blue;
                 // barsContainer.children[ j].style.background = colors.blue;
-                await wait(speed)
                 //console.log(true)
                 
-                barsContainer.children[ 1 ].style.background = colors.purple;
+                // barsContainer.children[ 1 ].style.background = colors.purple;
                 if ( array[i] > array[j] ) {
                     
                     // barsContainer.children[ j ].style.background = colors.purple;
@@ -185,9 +164,8 @@ export const sortingAlgs = () => {
 
         }
     
-        checkSorted();
+        sortedAnimation(array);
         
-    
     }
 
     

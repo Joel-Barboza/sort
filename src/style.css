@@ -4,22 +4,25 @@
     box-sizing: border-box;
 }
 
-body {
-    padding: 0 3rem;
-    background: #2c2c2c;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
 h2 {
     color: #c2c2c2;
+    max-height: 10vh;
+}
+
+#root {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
+    align-items: center;
+    background: #2c2c2c;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
+    max-height: 100%;
+    padding: 0 3rem;
 }
 
 .bar {
@@ -30,7 +33,7 @@ h2 {
     color: #000000;
     margin: 1px;
     /* width: 1px; */
-    width: 8px;
+    width: 1px;
     /* transition: background 50ms ease; */
     
 }
@@ -43,19 +46,28 @@ h2 {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    /* height: 310px; */
+    height: 70vh;
 }
 
 .btn-container {
     display: flex;
     justify-content: center;
+    max-height: 10vh;
 }
 
 button {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(8px, 4vh, 16px);
     border: none;
     background: rgb(148, 147, 147);
-    padding: .5rem 1rem;
+    padding: .5em 1em;
     margin: 2px;
     border-radius: 5px;
+}
+
+@media screen and (max-width: 300px) {
+    .btn-container{
+        flex-direction: column;
+        max-height: 20vh;
+    }
 }
