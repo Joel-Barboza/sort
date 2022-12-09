@@ -7,26 +7,39 @@ export const sortingAlgs = () => {
     const [disableBtn, setDisableBtn] = useState(false);
     const [isSorted, setIsSorted] = useState(false)
     const [arr, setArr] = useState({array: []});
-    const { barsContainer, colors, numberOfBars, resetColor, swap, numSwaps, resetSwapsNum, wait, sortedAnimation } = helperFunctions();
+    const { barsContainer, colors, numberOfBars, resetColor, swap, comps, numComps, resetCompsNum, wait, sortedAnimation } = helperFunctions();
 
     
-    const speed = 1;
+    const speed = 10;
     const { array } = arr;
     const arrayLength = array.length;
 
 
-    const newArray = () => {
+    const newArray = async() => {
+        setDisableBtn(true);
         resetColor(array, colors);
-        resetSwapsNum();
-        const tempArray = [];
+        resetCompsNum();
+        const tempArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 
+            21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
+            41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60,
+            61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
+            81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100,
+        ];
+        tempArray.length= numberOfBars 
+        console.log(numberOfBars, tempArray.length)
         let max = 500;
         let min = 4;
         
-        for (let i = 0; i < numberOfBars; i++) {
-            tempArray.push(Math.floor(Math.random() * ( max - min ) + min ));
+        setArr({ array: tempArray });
+        await wait(300)
+        for (let i = tempArray.length - 1; i > 0; i--) {
+            await wait(8);
+            let j = Math.floor(Math.random() * (i + 1));
+            [tempArray[i], tempArray[j]] = [tempArray[j], tempArray[i]];
+            setArr({ array: tempArray });
         }
         
-        setArr({ array: tempArray });
+        setDisableBtn(false)
         setIsSorted(false);
 
     }
@@ -43,16 +56,63 @@ export const sortingAlgs = () => {
         
     }
     
-    
+
+    const insertionSort = async() => {
+
+        if ( isSorted ) {
+            const generateNewArray = confirm('Array is already sorted \nDo you want to generate a new array?')
+            generateNewArray && newArray()
+            return;
+        }
+
+        for (let i = 1; i < array.length; i++) {
+            
+            i !== array.length 
+            && ( barsContainer.children[ i ].style.background = colors.purple );
+            
+            !!barsContainer.children[ i - 1] === !undefined 
+            && ( barsContainer.children[ i - 1].style.background = colors.green );
+            
+            setDisableBtn( true );
+            const currentValue = array[i];
+            let j = i - 1;
+            await wait(0);
+            
+            while (j >= 0 && array[j] > currentValue) {
+                
+                comps();
+                await wait(speed);
+                array[ j + 1 ] = array[j];
+                
+                j >= 0       && ( barsContainer.children[ j ].style.background = colors.purple );
+                j + 1 != i  && ( barsContainer.children[ j + 1].style.background = colors.green );
+                
+                j--;
+            }
+
+            i === array.length - 1
+            && ( barsContainer.children[ i ].style.background = colors.green )
+            
+            barsContainer.children[ j + 1].style.background = colors.green;
+            array[ j + 1 ] = currentValue;
+            setArr({array});
+        }
+
+        setDisableBtn( false );
+        setIsSorted(true);
+        sortedAnimation(array);
+    }
+
 
     const merge = async(array, start, end) => {
 
         let gap = end - start + 1;
         
         //setTimeout(async() => {
-        for ( gap = nextGap(gap); gap > 0; gap = nextGap(gap)) {
+        for ( gap = nextGap(gap); gap >= 1; gap = nextGap(gap)) {
 
-            await wait(speed * (arrayLength / 2) * gap);
+            //console.log(1)
+            await wait(speed * (arrayLength / 10) * gap);
                 for ( let i = start; i + gap <= end; i++ ) {
                     
                     //barsContainer.children[ 1 ].style.background = colors.purple;
@@ -61,7 +121,7 @@ export const sortingAlgs = () => {
                     // barsContainer.children[ j].style.background = colors.blue;
                     //barsContainer.children[ 1 ].style.background = colors.blue;
                     //console.log(true)
-                    
+                    comps();
                     if ( array[i] > array[j] ) {
                         
                         // barsContainer.children[ j ].style.background = colors.purple;
@@ -125,7 +185,7 @@ export const sortingAlgs = () => {
         // }
 
 
-        if ( isSorted === true ) {
+        if ( isSorted ) {
             const generateNewArray = confirm('Array is already sorted \nDo you want to generate a new array?')
             generateNewArray && newArray()
             return;
@@ -134,15 +194,15 @@ export const sortingAlgs = () => {
         // ---- iterates when all the elements of the array have been checked
         // each lap should be a new fully sorted element ----
         for (let i = 0; i < arrayLength; i++) {
-            
             setDisableBtn( true );
+            
             const iteration = arrayLength - i - 1;
 
             if (!!barsContainer.children[ iteration + 1] === !undefined ) {
                 barsContainer.children[ iteration + 1].style.background = colors.green;
                 barsContainer.children[ iteration ].style.background = colors.blue;
             }
-            await wait(( -speed * i + arrayLength ) );
+            //await wait(( -speed * i + arrayLength ) );
             
             // ---- iterates for every array item ----
             for (let j = 0; j < iteration; j++) {
@@ -151,7 +211,8 @@ export const sortingAlgs = () => {
                     barsContainer.children[ j ].style.background = colors.purple;
                     barsContainer.children[ j + 1 ].style.background = colors.purple;
                 }
-
+                
+                comps();
                 if ( array[ j ] > array[ j + 1]){
                     swap(array, j, j + 1)
                 } 
@@ -180,8 +241,9 @@ export const sortingAlgs = () => {
         disableBtn,
         bubbleSort,
         mergeSort,
+        insertionSort,
         merge,
         resetColor,
-        numSwaps
+        numComps
     }
 }

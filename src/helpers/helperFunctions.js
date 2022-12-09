@@ -6,14 +6,15 @@ export const helperFunctions = () => {
     const width = innerWidth;
 
     const barsContainer = document.getElementById('barsContainer');
-    const [numSwaps, setNumSwaps] = useState(0)
-    const numberOfBars = width / 14 ;
+    const [numComps, setNumComps] = useState(0)
+    const numberOfBars = Math.floor(width / 14);
     const colors = {
         purple: 'rgb(233, 96, 233)',
         green: 'rgb(94, 219, 121)',
         blue: 'rgb(112, 146, 214)',
         pink: 'pink',
-        red: 'red'
+        red: 'red',
+        black: 'black',
     }
 
     const resetColor = (array, colors) => {
@@ -22,18 +23,21 @@ export const helperFunctions = () => {
         });
     }
 
-    const resetSwapsNum = () => {
-        setNumSwaps(0)
+    const comps = () => {
+        setNumComps((previousNum) => {
+                return previousNum + 1;
+            }
+        )
+    }
+
+    const resetCompsNum = () => {
+        setNumComps(0)
     }
 
     const swap = (array,i,j) => {
         let temp = array[i];
         array[i] = array[j];
         array[j] = temp;
-        setNumSwaps((previousNum) => {
-                return previousNum + 1;
-            }
-        )
         
     }
 
@@ -69,10 +73,11 @@ export const helperFunctions = () => {
         colors, 
         resetColor,
         swap,
-        numSwaps,
+        comps,
+        numComps,
         wait,
         barsContainer,
-        resetSwapsNum,
+        resetCompsNum,
         sortedAnimation,
     }
 }

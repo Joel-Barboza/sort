@@ -5,7 +5,7 @@ import { sortingAlgs } from './helpers/sortingAlgs';
 
 export const SortApp = () => {
 
-    const { array, newArray, disableBtn, bubbleSort, mergeSort, test, numSwaps} = sortingAlgs();
+    const { array, newArray, disableBtn, bubbleSort, mergeSort, insertionSort, test, numComps} = sortingAlgs();
 
     const hei = () => {
         let height = document.getElementById('barsContainer').offsetHeight;
@@ -14,7 +14,7 @@ export const SortApp = () => {
 
     return (
         <>
-            <h2>Swaps: { numSwaps }</h2>
+            <h2>Comparisons: { numComps }</h2>
             <div id="barsContainer" className="bar-container">
                 {
                     array.map( (value, index) => (
@@ -29,12 +29,13 @@ export const SortApp = () => {
                 <button onClick={ newArray } disabled={ disableBtn }>New Array</button>
                 <button onClick={ bubbleSort } disabled={ disableBtn }>Bubble Sort</button>
                 {/* <button onClick={ hei } >Height</button> */}
-                <button 
+                {/* <button 
                     onClick={ () => mergeSort(array, 0, array.length - 1)} 
                     disabled={ disableBtn }
                 >
                     Merge Sort
-                </button>
+                </button> */}
+                <button onClick={ insertionSort } disabled={ disableBtn }>Insertion Sort</button>
                 {/* <button onClick={ test } disabled={ disableBtn }>test</button> */}
             </div>
         </>

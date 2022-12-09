@@ -29,14 +29,29 @@ h2 {
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    /* background: rgba(112, 146, 214, 0); */
     background: rgb(112, 146, 214);
     color: #000000;
     margin: 1px;
     /* width: 1px; */
     width: 8px;
-    /* transition: background 50ms ease; */
+    /* transition: background 50ms ease;*/
+    /* border-top: 8px solid red;  */
     
 }
+
+/* .bar::before { 
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    background-color: yellow;
+    color: red;
+    font-weight: bold;
+    width: 8px;
+    height: 8px;
+  } */
+
 .bar p {
     text-align: start;
     margin: 0;
@@ -46,7 +61,7 @@ h2 {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    height: 70vh;
+    height: clamp(250px, 60vh, 1000px);
 }
 
 .btn-container {
