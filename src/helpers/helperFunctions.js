@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export const helperFunctions = () => {
 
-    const barForWidth = Math.floor(innerWidth / 14);
+    const barForWidth = Math.floor(innerWidth / 10);
 
     const barsContainer = document.getElementById('barsContainer');
     const [numComps, setNumComps] = useState(0)
