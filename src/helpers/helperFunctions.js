@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { useState } from 'react';
 
 export const helperFunctions = () => {
 
@@ -71,15 +70,15 @@ export const helperFunctions = () => {
     }
 
     return {
-        numberOfBars,
-        colors, 
-        resetColor,
-        swap,
-        comps,
-        numComps,
-        wait,
-        barsContainer,
-        resetCompsNum,
-        sortedAnimation,
+        numberOfBars,       // number
+        colors,             // object
+        resetColor,         // function
+        swap,               // function
+        sortedAnimation,    // function
+        comps,              // function
+        resetCompsNum,      // function
+        numComps,           // state number
+        wait,               // timeout promise
+        barsContainer,      // DOM element
     }
 }
