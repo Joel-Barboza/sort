@@ -3,11 +3,13 @@ import { useState } from "react";
 
 export const helperFunctions = () => {
 
-    const width = innerWidth;
+    const barForWidth = Math.floor(innerWidth / 14);
 
     const barsContainer = document.getElementById('barsContainer');
     const [numComps, setNumComps] = useState(0)
-    const numberOfBars = Math.floor(width / 14);
+    let numberOfBars = 100;
+    barForWidth < 100 && ( numberOfBars = barForWidth );
+    
     const colors = {
         purple: 'rgb(233, 96, 233)',
         green: 'rgb(94, 219, 121)',
