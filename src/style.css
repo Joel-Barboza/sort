@@ -61,7 +61,7 @@ h2 {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    height: clamp(250px, 60vh, 1000px);
+    height: clamp(250px, 50vh, 1000px);
 }
 
 .btn-container {
